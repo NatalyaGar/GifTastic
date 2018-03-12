@@ -1,0 +1,28 @@
+body{
+    background-color: rgb(216, 212, 208)
+}
+
+.animal-btn,
+#add-animal {
+    margin: 5px;
+    background-color: rgb(94, 180, 176);
+    color: aliceblue;
+    font-size: 15px;
+}
+
+#form-animals {
+    margin-left: 76%;
+}
+
+#animal-input {
+    padding: 3px 60px ;
+    margin-top: 3px;
+    margin-bottom: 5px;
+    border: 1px solid rgb(148, 141, 141);
+}
+
+.gif {
+    display: inline-block;
+    margin: 10px;
+ 
+}
