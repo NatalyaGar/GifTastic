@@ -34,7 +34,7 @@ $("#animal-buttons").on("click", '.animal-btn', function(){
    
     //Define variable for the API URL
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + whichAnimal + "&api_key=EUFpjo8f4hi5Cr9D57Ff05spEpNxgqgD";
-    // var queryURL = "https://api.giphy.com/v1/gifs/random?q=" + whichAnimal + "&api_key=EUFpjo8f4hi5Cr9D57Ff05spEpNxgqgD";
+    
     //Making the AJAX call to the queryURL using jQuery
         $.ajax({
             url: queryURL,
@@ -44,37 +44,24 @@ $("#animal-buttons").on("click", '.animal-btn', function(){
         .then(function(response) {
             console.log(response);
 
-        //  console.log(response.data.images.fixed_width.url);
-        //  console.log(response.data.images.fixed_height_small_still.url);
-
-        //  var movingGif = response.data.images.fixed_width.url;
-        //  var stillGif = response.data.images.fixed_height_small_still.url;
-
-        //Defining a variable that is the url of an image
-
-        // var animalImage = $('<img src="' + stillGif + '">');
-        //     $('#animalsGifs').prepend(animalImage);
-
-
             var results = response.data;
             for (var i=0; i< 10; i++){
-                var gifDiv = $("<div class='gif'>");
+               
                 var rating = results[i].rating;
                 var p = $("<p>").text("Rating: " + rating);
                 var animalImage = $("<img>");
 
+                
                 var movingGif = results[i].images.fixed_height.url;
                 var stillGif = results[i].images.fixed_height_still.url;
 
-                // animalImage.attr("src",results[i].images.fixed_height_still.url);
-                // animalImage.attr("src",results[i].images.fixed_height_still.url);
-                animalImage.attr("src", stillGif);
-                // animalImage.attr("src", movingGif);
-                // animalImage.attr("src",results[i].images.fixed_height.url);
-                // animalImage.attr("src",results[i].images.fixed_height.url, data-state, "still", data-animate);
-                gifDiv.prepend(p);
-                gifDiv.prepend(animalImage);
-                $("#animalsGifs").prepend(gifDiv);
+                animalImage.attr("src", stillGif)
+
+                animalImage.attr("data-state","still");
+                animalImage.attr("data-animate",movingGif);
+                animalImage.attr("data-still",stillGif); 
+            
+                $("#animalsGifs").prepend(animalImage);
                 
             }
 
@@ -83,49 +70,21 @@ $("#animal-buttons").on("click", '.animal-btn', function(){
 })
 
         
-
-$(".gif").on("click",function() {
-
+$("#animalsGifs").on("click", 'img', function(){
+    console.log("hi");
     
+    var state = $(this).attr("data-state");
+ 
+    if (state === "still") {
+        
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state","animate");
 
-    var movingGif = response.data.images.fixed_height.url;
-    var stillGif = response.data.images.fixed_height_still.url;
-
-     animalImage.attr("src",movingGif );
-    //  animalImage.attr("src",stillGif );
-     $('#animalsGifs').prepend(animalImage);
-
-    //  gifDiv.prepend(animalImage);
-            // $('#animalsGifs').prepend(gifDiv);
-// })
-
-    
-    // var state = $(this).attr("data-state");
-    // var state = $(this).attr(movingGif);
-    var state = $(this).attr("src",stillGif);
-//     // var state = $(this).attr("src",results[i].images.fixed_height_still.url);
-    
-//     // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-//     // Then, set the image's data-state to animate
-//     // Else set src to the data-still value
-//     // if (state === "still") {
-        // if (state === stillGif) {
-            if (state === state) {
-//         // $(this).attr("src", $(this).attr("data-animate"));
-        $(this).attr("src", $(this).attr("src",movingGif));
-//         // $(this).attr( $(this).attr(movingGif));
-//         // $(this).attr("src", $(this).attr("src",results[i].images.fixed_height.url));
-//         // $(this).attr("data-state", "animate");
-        $(this).attr("src",movingGif );
-//         // $(this).attr("src",results[i].images.fixed_height_still.url, "src",results[i].images.fixed_height.url );
       } else {
-//         // $(this).attr("src", $(this).attr("data-still"));
-        $(this).attr("src", $(this).attr(stillGif));
-//         // $(this).attr("src", $(this).attr(stillGif));
-//         // $(this).attr("src", $(this).attr("src",results[i].images.fixed_height_still.url));
-//         $(this).attr("data-state", "still");
-        $(this).attr("src",stillGif);
-//         // $(this).attr("src",results[i].images.fixed_height_still.url, "still");
+        $(this).attr("src", $(this).attr("data-still"));
+        
+        $(this).attr("data-state", "still");
+ 
   }
 })
 
