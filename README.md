@@ -6,4 +6,4 @@
 Please check out the app at 
 https://natalyagar.github.io/GifTastic/
 
-<img src="assets/images/gifTastic.png" alt="Progect Picrure" width="300" height="200" />
+<img src="assets/images/gifTastic.png" alt="Project Picture" width="300" height="200" />
